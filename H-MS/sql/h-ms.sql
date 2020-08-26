@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2020 at 01:44 AM
+-- Generation Time: Aug 20, 2020 at 09:07 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -77,6 +77,32 @@ INSERT INTO `patients` (`id`, `nomPatient`, `localisation`, `agePatient`, `sexeP
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rendez-vous`
+--
+
+CREATE TABLE `rendez-vous` (
+  `id` int(11) NOT NULL,
+  `doctor Spécialisation` varchar(255) DEFAULT NULL,
+  `doctorId` int(11) DEFAULT NULL,
+  `patientId` int(11) DEFAULT NULL,
+  `frais de consultation` int(11) DEFAULT NULL,
+  `rendez-vous Date` varchar(255) DEFAULT NULL,
+  `rendez-vous Heure` varchar(255) DEFAULT NULL,
+  `date d'affichage` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rendez-vous`
+--
+
+INSERT INTO `rendez-vous` (`id`, `doctor Spécialisation`, `doctorId`, `patientId`, `frais de consultation`, `rendez-vous Date`, `rendez-vous Heure`, `date d'affichage`) VALUES
+(1, 'Dentiste', 7, 3, 600, '2020-06-29', '9:15 AM', '2020-06-23 17:31:28'),
+(2, 'ophtalmologue', 6, 2, 8050, '2020-11-08', '1:00 PM', '2020-11-05 09:28:54'),
+(3, 'Dermatologue', 5, 4, 500, '2020-11-30', '5:30 PM', '2020-11-10 17:41:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -97,7 +123,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nome`, `prenom`, `email`, `password`, `tel`, `status`, `Spécialisation`) VALUES
 (1, 'azdad', 'farah', 'azdad@gmail.com', '654321', 677894321, 'doctor', 'Dermatologue'),
-(2, 'sara', 'slaoui', 'slaoui@gmail.com', 'programming', 712345678, 'admin', 'NULL'),
+(2, 'sara', 'slaoui', 'admin@gmail.com', 'programming', 712345678, 'admin', 'NULL'),
 (3, 'ahmed', 'benchakroun', 'benchakroun@gmail.com', '12345', 712345672, 'doctor', 'Médecin généraliste'),
 (4, 'safia', 'elyoussfi', 'elyoussfi@gmail.com', 'wxyz', 712348942, 'doctor', 'Psychiatre'),
 (5, 'karima', 'eljawhari', 'eljahwari@gmail.com', 'hospital', 725667841, 'doctor', 'Dermatologue'),
@@ -121,6 +147,12 @@ ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rendez-vous`
+--
+ALTER TABLE `rendez-vous`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -135,6 +167,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `patients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `rendez-vous`
+--
+ALTER TABLE `rendez-vous`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -12,7 +12,7 @@ if(isset($_POST['telPatient'])){
   $res = mysqli_query($conn, $sql);
   $num = mysqli_fetch_array($res);
   if($num['telPatient'] == $telPatient && $num['numéro'] == $numéro){
-     header("location:patient.php");
+     header("location:patient/dashboard.php");
    
   }else{
     echo 'Failed to login';

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('conection.php');
 
 if(isset($_POST['logout_btn']))
 {
@@ -10,24 +11,3 @@ if(isset($_POST['logout_btn']))
 
 ?>
 
-$num = mysqli_fetch_array($res);
-  if($num['telPatient'] == $telPatient && $num['numéro'] == $numéro){
-     header("location:patient.php");
-   
-  }else{
-    echo 'Failed to login';
-
-  }
-
-
-  $num = mysql_num_rows($res);
-  if($num == 1)
-  {
-    echo 'login succes';
-    header("location:patient.php");
-   
-  }else
-  {
-    echo 'Failed to login';
-  }
-}

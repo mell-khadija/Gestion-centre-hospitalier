@@ -61,7 +61,7 @@ include("includ/base.php");
 											<h2 class="StepTitle">Manage Doctors</h2>
 										
 											<p class="cl-effect-1">
-												<a href="manage-doctors.php">
+												<a href="registre.php">
 												<?php $result1 = mysqli_query($conn,"SELECT * FROM users ");
 $num_rows1 = mysqli_num_rows($result1);
 {

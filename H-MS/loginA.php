@@ -26,7 +26,7 @@ session_start();
 
      }
      else if($result->num_rows==1 && $_SESSION['role']=="doctor"){
-        header("location:doctor/doctor.php");
+        header("location:doctor/dashboard.php");
         
     }
     
