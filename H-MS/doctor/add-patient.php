@@ -6,6 +6,10 @@ include('includ/conection.php');
 
 
 
+
+
+
+	
 if(isset($_POST['submit']))
 {	
 $id=$_SESSION['id'];
@@ -17,6 +21,8 @@ $telPatient=$_POST['telP'];
 $dateN=$_POST['naiss'];
 $DiaP=$_POST['dP'];
 $ordP=$_POST['oP'];
+$numero=$_POST['numero'];
+
 
 
 $sql=mysqli_query($conn,"INSERT INTO `patients`(`id`, `nomPatient`, `localisation`, `agePatient`, `sexePatient`, `telPatient`, `date de naissance`, `diagnostic`, `ordonnance`, `numéro`) values('$id','$nomPatient','$localisation','$agePatient','$sexePatient','$telPatient','$dateN','$DiaP','$ordP','$numero')");
@@ -31,7 +37,7 @@ header('location:add-patient.php');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Doctor | Add Patient</title>
+		<title>Medecin | Ajouter Patient</title>
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -60,16 +66,9 @@ header('location:add-patient.php');
 <section id="page-title">
 <div class="row">
 <div class="col-sm-8">
-<h1 class="mainTitle">Patient | Add Patient</h1>
+<h1 class="mainTitle">Patients | Ajouter Patient</h1>
 </div>
-<ol class="breadcrumb">
-<li>
-<span>Patient</span>
-</li>
-<li class="active">
-<span>Add Patient</span>
-</li>
-</ol>
+
 </div>
 </section>
 <div class="container-fluid container-fullw bg-white">
@@ -78,15 +77,13 @@ header('location:add-patient.php');
 <div class="row margin-top-30">
 <div class="col-lg-8 col-md-12">
 <div class="panel panel-white">
-<div class="panel-heading">
-<h5 class="panel-title">Add Patient</h5>
-</div>
+
 <div class="panel-body">
 <form role="form" name="" method="post">
 
 <?php 
 
-function checkkeys($conn,$rstr){
+function checkkeys($conn,$numero){
 	$sql = "SELECT * FROM `patients`";
 	$rslt = mysqli_query($conn,$sql);
     
@@ -102,7 +99,7 @@ function checkkeys($conn,$rstr){
 
 }
 
-function generatekey(){
+function Numéro($conn){
 	$keyLength = 4;
 	$str = "1234567890";
 	$numero = substr(str_shuffle($str), 0, $keyLength);
@@ -110,7 +107,7 @@ function generatekey(){
 	$checkkey = checkkeys($conn,$numero);
 	while($checkkey == true){
 		$numero = substr(str_shuffle($str), 0, $keyLength);
-		$checkkeys = checkkeys($conn, $numero);
+		$checkkey = checkkeys($conn, $numero);
 
 	}
 	return $numero;
@@ -118,7 +115,7 @@ function generatekey(){
 	
 }
 
-echo "<h3 style='color: #EF3235;'>generatekey: <strong>$numero</strong></h3>";?>
+?>
 	
 <div class="form-group">
 <label for="doctorname">
@@ -178,6 +175,12 @@ Date de naissance
 </label>
 <textarea type="text" name="oP" class="form-control"  placeholder="Ordonnance(if any)" required="true"></textarea>
 </div>
+<div class="form-group">
+<label for="fess">
+Numéro
+</label>
+<input type="num" name="numero" class="form-control"  placeholder="numero"  value="<?php echo Numéro($conn);?>" required="true"></input>
+</div>
 
 
 
@@ -211,35 +214,6 @@ Ajouter
 			<!-- end: SETTINGS -->
 		</div>
         <?php include('includ/footer.php');?>
-		<!-- start: MAIN JAVASCRIPTS -->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="vendor/modernizr/modernizr.js"></script>
-		<script src="vendor/jquery-cookie/jquery.cookie.js"></script>
-		<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-		<script src="vendor/switchery/switchery.min.js"></script>
-		<!-- end: MAIN JAVASCRIPTS -->
-		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-		<script src="vendor/maskedinput/jquery.maskedinput.min.js"></script>
-		<script src="vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
-		<script src="vendor/autosize/autosize.min.js"></script>
-		<script src="vendor/selectFx/classie.js"></script>
-		<script src="vendor/selectFx/selectFx.js"></script>
-		<script src="vendor/select2/select2.min.js"></script>
-		<script src="vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-		<script src="vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-		<!-- start: CLIP-TWO JAVASCRIPTS -->
-		<script src="assets/js/main.js"></script>
-		<!-- start: JavaScript Event Handlers for this page -->
-		<script src="assets/js/form-elements.js"></script>
-		<script>
-			jQuery(document).ready(function() {
-				Main.init();
-				FormElements.init();
-			});
-		</script>
-		<!-- end: JavaScript Event Handlers for this page -->
-		<!-- end: CLIP-TWO JAVASCRIPTS -->
+		
 	</body>
 </html>

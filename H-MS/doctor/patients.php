@@ -9,10 +9,10 @@ include('includ/conection.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Gérer Les Patients</title>
+    <title>Medecin | Gérer Les Patient</title>
 </head>
 <body>
-<?php  include("includ/base.php")?>
+<?php  include("includ/basepa.php")?>
 <div class="container-fluid">
 
 <div class="card shadow mb-4">
@@ -33,10 +33,13 @@ include('includ/conection.php');
         <thead>
           <tr>
               <th > ID </th>
-              <th> Nom PATIENT</th>
-              <th >Telephone PATIENT</th>
-              <th >SEXE PATIENT</th>
-              <th >NUMERO</th>
+              <th > Nom </th>
+              <th > Localisation</th>
+              <th >Age </th>
+              <th >Sexe</th>
+              <th >Téléphone</th>
+              <th >Date de naissance</th>
+              <th >Numéro</th>
               <th >EDIT</th>
               <th >DELETE</th>
           </tr>
@@ -51,23 +54,30 @@ include('includ/conection.php');
           <tr>
             <td><?php  echo $row['id']; ?></td>
             <td><?php  echo $row['nomPatient']; ?></td>
-            <td><?php  echo $row['telPatient']; ?></td>
+            <td><?php  echo $row['localisation']; ?></td>
+            <td><?php  echo $row['agePatient']; ?></td>
             <td><?php  echo $row['sexePatient']; ?></td>
+            <td><?php  echo $row['telPatient']; ?></td>
+            <td><?php  echo $row['date de naissance']; ?></td>
             <td><?php  echo $row['numéro']; ?></td>
-            
-            
            
            
             <td>
-                <form action="edit-patient.php" method="post">
+                <form action="edit-doctor.php" method="post">
                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                     <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                 </form>
             </td>
             <td>
-                <form action="delet-patient.php" method="post">
+                <form action="delet-doctor.php" method="post">
                   <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                   <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
+                </form>
+            </td>
+            <td>
+                <form action="delet-doctor.php" method="post">
+                <a href="view-patient.php?viewid=<?php echo $row['ID'];?>"><i class="fa fa-eye"></i></a>
+                 
                 </form>
             </td>
           </tr>
@@ -86,7 +96,7 @@ include('includ/conection.php');
 </div>
 
 </div>
-<?php  include("../footer.php") ?>
+<?php  include("includ/footer.php") ?>
 <!-- /.container-fluid -->
 
 

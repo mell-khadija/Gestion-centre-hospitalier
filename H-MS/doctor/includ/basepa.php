@@ -63,7 +63,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="add-patient.php">Ajouter patient</a>
-            <a class="collapse-item" href="registre-patient.php">Gérer les patient</a>
+            <a class="collapse-item" href="patients.php">Gérer les patient</a>
             
             
           </div>
@@ -79,7 +79,7 @@
       </li>
       
 
-       <hr class="sidebar-divider">
+      
 
       
       
@@ -145,7 +145,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Se déconnecter
                 </a>
               </div>
             </li>
@@ -165,16 +165,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Prêt à partir?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Sélectionnez «Déconnexion» ci-dessous si vous êtes prêt à mettre fin à votre session en cours.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <form action="logout.php" method="POST"> 
-              <button type="submit" name="logout_btn" class="btn btn-primary">Logout</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+          <form action="../index.php" method="POST"> 
+              <button type="submit" name="logout_btn" class="btn btn-primary">Se déconnecter</button>
           </form>
 
         </div>

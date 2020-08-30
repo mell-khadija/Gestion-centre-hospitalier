@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -13,7 +12,7 @@ if(isset($_POST['submit']))
     $tel = $_POST['tel'];
     $status = $_POST['status'];
     $spécialisation = $_POST['spécialisation'];
-$sql=mysqli_query($conn," UPDATE patients set nome='$nom',prenom='$prenom',email='$email',tel='$tel',status='$status',spécialisation='$spécialisation' where email='".$_SESSION['email']."'");
+$sql=mysqli_query($conn," UPDATE users set nome='$nom',prenom='$prenom',email='$email',tel='$tel',status='$status',spécialisation='$spécialisation' where email='".$_SESSION['email']."'");
 if($sql)
 {
 echo "Doctor Details updated Successfully";
@@ -39,7 +38,7 @@ header("location:dashboard.php");
 	</head>
 	<body>
 		<div id="app">		
-<?php include('includ/basep.php');?>
+<?php include('includ/basepa.php');?>
 			<div class="app-content">
 				
 				<div class="main-content" >
@@ -66,7 +65,7 @@ header("location:dashboard.php");
 													<h5 class="panel-title">Edit Doctor</h5>
 												</div>
 												<div class="panel-body">
-									<?php $sql=mysqli_query($conn,"select * from patient where email='".$_SESSION['email']."'");
+									<?php $sql=mysqli_query($conn,"select * from users where email='".$_SESSION['email']."'");
                                    while($data=mysqli_fetch_array($sql))
 {
 ?>

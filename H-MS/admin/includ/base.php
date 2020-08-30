@@ -79,7 +79,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="add-doctor.php">Ajouter doctor</a>
-            <a class="collapse-item" href="">doctor spésialisation</a>
+            <a class="collapse-item" href="doc-specialisation.php">doctor spésialisation</a>
             <a class="collapse-item" href="registre.php">Gérer les médecins</a>
             
           </div>
