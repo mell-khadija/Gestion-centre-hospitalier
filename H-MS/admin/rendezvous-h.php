@@ -7,7 +7,7 @@ include('includ/conection.php');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Doctor  |Tableau de bord</title>
+		<title>Patients | Historique des rendez-vous</title>
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -22,16 +22,14 @@ include('includ/conection.php');
 		<link href="vendor/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" media="screen">
 		<link rel="stylesheet" href="css/styles.css">
 		
-
-
 	</head>
 	<body>
 		<div id="app">		
-<?php include('includ/basepa.php');?>
+<?php include('includ/base.php');?>
 			<div class="app-content">
 				
-						
-						
+
+					
 				<!-- end: TOP NAVBAR -->
 				<div class="main-content" >
 					<div class="wrap-content container" id="container">
@@ -39,52 +37,69 @@ include('includ/conection.php');
 						<section id="page-title">
 							<div class="row">
 								<div class="col-sm-8">
-									<h1 class="mainTitle">Médecins | Tableau de bord</h1>
+									<h1 class="mainTitle">Patients  | Historique des rendez-vous</h1>
 																	</div>
 								
 							</div>
 						</section>
 						<!-- end: PAGE TITLE -->
 						<!-- start: BASIC EXAMPLE -->
-							<div class="container-fluid container-fullw bg-white">
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="panel panel-white no-radius text-center">
-										<div class="panel-body">
-											<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span>
-											<h2 class="StepTitle">Mon Profil</h2>
+						<div class="container-fluid container-fullw bg-white">
+						
+
+									<div class="row">
+								<div class="col-md-12">
+									
+									
+									<table class="table table-hover" id="sample-table-1">
+										<thead>
+											<tr>
+												<th class="center">id</th>
+												<th class="hidden-xs">Doctor Name</th>
+												<th class="hidden-xs">Doctor prenom</th>
+												<th>Patient Name</th>
+												<th>Spécialisation</th>
+												<th>rendez-vous Date </th>
+												<th>rendez-vous Heure </th>
+												<th>Action</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+<?php
+$sql=mysqli_query($conn,"SELECT  users.nome AS nome, users.prenom AS prenom, patients.nomPatient AS nomP, rendez_vous.* FROM rendez_vous JOIN users ON users.id = rendez_vous.doctorId JOIN patients ON patients.id = rendez_vous.patientId ");
+
+while($row=mysqli_fetch_array($sql))
+{
+?>
+
+											<tr>
+												<td class="center"><?php echo $row['id'];?>#</td>
+												<td class="hidden-xs"><?php echo $row['nome'];?></td>
+												<td class="hidden-xs"><?php echo $row['prenom'];?></td>
+												<td class="hidden-xs"><?php echo $row['nomP'];?></td>
+												<td><?php echo $row['doctor Spécialisation'];?></td>
+												
+												<td><?php echo $row['rendez-vous Date'];?> 
 											
-											<p class="links cl-effect-1">
-												<a href="profile.php">
-													Mettre à jour Profile
-												</a>
-											</p>
-										</div>
-									</div>
+												</td>
+												<td><?php echo $row['rendez-vous Heure'];?></td>
+												
+												
+											</tr>
+											
+											<?php 
+
+											 }?>
+											
+											
+										</tbody>
+									</table>
 								</div>
-								<div class="col-sm-4">
-									<div class="panel panel-white no-radius text-center">
-										<div class="panel-body">
-											<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-paperclip fa-stack-1x fa-inverse"></i> </span>
-											<h2 class="StepTitle">Mon rendez-vous</h2>
-										
-											<p class="cl-effect-1">
-												<a href="rendezvous-hi.php">
-												Afficher l'historique des rendez-vous
-												</a>
-											</p>
-										</div>
-									</div>
-								</div>
-								
 							</div>
-						</div>
-			
-					
-					
+								</div>
 						
-						
-					
+						<!-- end: BASIC EXAMPLE -->
 						<!-- end: SELECT BOXES -->
 						
 					</div>
@@ -94,9 +109,6 @@ include('includ/conection.php');
 	<?php include('includ/footer.php');?>
 			<!-- end: FOOTER -->
 		
-			<!-- start: SETTINGS -->
-	
-			<!-- end: SETTINGS -->
 		</div>
 		
 	</body>

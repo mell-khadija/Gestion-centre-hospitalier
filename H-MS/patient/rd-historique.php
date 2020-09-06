@@ -5,14 +5,14 @@ include('includ/conection.php');
 
 if(isset($_GET['cancel']))
 		  {
-		          mysqli_query($conn,"update appointment set userStatus='0' where id = '".$_GET['id']."'");
+		          mysqli_query($conn,"update rendez_vous set userStatus='0' where id = '".$_GET['id']."'");
                   $_SESSION['msg']="Your appointment canceled !!";
 		  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>User | Appointment History</title>
+		<title>Patient | Historique des rendez-vous</title>
 		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -40,7 +40,7 @@ if(isset($_GET['cancel']))
 						<section id="page-title">
 							<div class="row">
 								<div class="col-sm-8">
-									<h1 class="mainTitle">User  | Appointment History</h1>
+									<h1 class="mainTitle">Patient  | Historique des rendez-vous</h1>
 																	</div>
 								
 							</div>
@@ -59,7 +59,8 @@ if(isset($_GET['cancel']))
 										<thead>
 											<tr>
 												<th class="center">#</th>
-												<th class="hidden-xs">Doctor nome</th>
+												<th class="hidden-xs">Docteur Nom</th>
+												<th class="hidden-xs">Docteur Prenom</th>
 												<th>Spécialisation</th>
 												<th>Rendez-vous Date</th>
 												<th>Rendez-vous Heure </th>
@@ -70,7 +71,7 @@ if(isset($_GET['cancel']))
 										</thead>
 										<tbody>
 <?php
-$sql=mysqli_query($conn,"select doctors.doctorName as docname,appointment.*  from appointment join doctors on doctors.id=appointment.doctorId where appointment.userId='".$_SESSION['id']."'");
+$sql=mysqli_query($conn,"select users.nome as nome,users.prenom AS prenom,rendez_vous.*  from rendez_vous join users on users.id=rendez_vous.doctorId where rendez_vous.patientId='".$_SESSION['id']."'");
 $cnt=1;
 while($row=mysqli_fetch_array($sql))
 {
@@ -79,66 +80,26 @@ while($row=mysqli_fetch_array($sql))
 											<tr>
 												<td class="center"><?php echo $cnt;?>.</td>
 												<td class="hidden-xs"><?php echo $row['nome'];?></td>
-												<td><?php echo $row['doctorSpécialisation'];?></td>
-												<td><?php echo $row[''];?></td>
-												<td><?php echo $row['rddate'];?> / <?php echo
-												 $row['rdtime'];?>
-												</td>
-												<td><?php echo $row['dateaff'];?></td>
-												<td>
-<?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-{
-	echo "Active";
-}
-if(($row['userStatus']==0) && ($row['doctorStatus']==1))  
-{
-	echo "Cancel by You";
-}
-
-if(($row['userStatus']==1) && ($row['doctorStatus']==0))  
-{
-	echo "Cancel by Doctor";
-}
+												<td><?php echo $row['prenom'];?></td>
+												<td><?php echo $row['doctor Spécialisation'];?></td>
+												
+												<td><?php echo $row['rendez-vous Date'];?></td>
+												<td><?php echo $row['rendez-vous Heure'];?> </td>
+												<td><?php echo $row['date affichage'];?></td>
+												
 
 
 
-												?></td>
-												<td >
-												<div class="visible-md visible-lg hidden-sm hidden-xs">
-							<?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-{ ?>
 
+												
+									
+												
+							
 													
-	<a href="appointment-history.php?id=<?php echo $row['id']?>&cancel=update" onClick="return confirm('Are you sure you want to cancel this appointment ?')"class="btn btn-transparent btn-xs tooltips" title="Cancel Appointment" tooltip-placement="top" tooltip="Remove">Cancel</a>
-	<?php } else {
-
-		echo "Canceled";
-		} ?>
-												</div>
-												<div class="visible-xs visible-sm hidden-md hidden-lg">
-													<div class="btn-group" dropdown is-open="status.isopen">
-														<button type="button" class="btn btn-primary btn-o btn-sm dropdown-toggle" dropdown-toggle>
-															<i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu pull-right dropdown-light" role="menu">
-															<li>
-																<a href="#">
-																	Edit
-																</a>
-															</li>
-															<li>
-																<a href="#">
-																	Share
-																</a>
-															</li>
-															<li>
-																<a href="#">
-																	Remove
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div></td>
+	<td><a href="appointment-history.php?id=<?php echo $row['id']?>&cancel=update" onClick="return confirm('Are you sure you want to cancel this appointment ?')"class="btn btn-transparent btn-xs tooltips" title="Cancel Appointment" tooltip-placement="top" tooltip="Remove">Cancel</a></td>
+	
+												
+												
 											</tr>
 											
 											<?php 

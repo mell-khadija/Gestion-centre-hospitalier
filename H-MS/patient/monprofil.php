@@ -9,7 +9,7 @@
 <!-- for retriving data -->
 				<?php 
 							include('includ/conection.php');
-							$sql="SELECT * FROM patients where numéro='". $_SESSION["numéro"]."'" ;
+							$sql="SELECT * FROM patients where numéro='". $_SESSION["numero"]."'" ;
 			
 							$q=mysqli_query($conn,$sql);
 							$row=mysqli_num_rows($q);

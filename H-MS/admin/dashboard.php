@@ -94,6 +94,26 @@ Total Patients :<?php echo htmlentities($num_rows);
 									</div>
 								</div>
 
+								<div class="col-sm-4">
+									<div class="panel panel-white no-radius text-center">
+										<div class="panel-body">
+											<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
+											<h2 class="StepTitle"> Rendez-vous</h2>
+											
+											<p class="links cl-effect-1">
+												<a href="book-appointment.php">
+													<a href="rendezvous-h.php">
+												<?php $sql= mysqli_query($conn,"SELECT * FROM `rendez_vous`");
+$num_rows = mysqli_num_rows($sql);
+{
+?>
+											Totale 	Rendez-vous :<?php echo ($num_rows);  } ?>	
+												</a>
+												</a>
+											</p>
+										</div>
+									</div>
+								</div>
 
 					    
 								</div>

@@ -3,26 +3,21 @@ session_start();
 
 include('includ/conection.php');
 
+$id=intval($_GET['id']);// get value
 if(isset($_POST['submit']))
 {
-	
-	$spécialisation=$_POST['spécialisation'];
-$sql="INSERT INTO doctorspécialisation (`id`, `spécialisation`) VALUES ( '', '$spécialisation' )";
-$new=mysqli_query($conn,$sql);
- echo"data inserted";
-}
+$specialisation = $_POST['specialisation'];
+$sql=mysqli_query($conn,"update  doctorspécialisation set spécialisation='$specialisation' where id='$id'");
+echo"<script>alert('Docteur Specialisation updated successfully');</script>";
+header('location:dashboard.php');
+} 
 
-if(isset($_GET['del']))
-		  {
-		          mysqli_query($conn,"delete from doctorspécialisation where id = '".$_GET['id']."'");
-                  $_SESSION['msg']="data deleted !!";
-		  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Admin | Doctor Spécialisation</title>
-	
+		<title>Admin | Éditer Docteur spécialisation</title>
+		
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
@@ -51,7 +46,7 @@ if(isset($_GET['del']))
 						<section id="page-title">
 							<div class="row">
 								<div class="col-sm-8">
-									<h1 class="mainTitle">Admin | Ajouter Doctor Spécialisation</h1>
+									<h1 class="mainTitle">Admin | Éditer Docteur spécialisation</h1>
 																	</div>
 								
 							</div>
@@ -66,18 +61,30 @@ if(isset($_GET['del']))
 										<div class="col-lg-6 col-md-12">
 											<div class="panel panel-white">
 												<div class="panel-heading">
-													<h5 class="panel-title">Doctor Spécialisation</h5>
+													<h5 class="panel-title">Éditer Docteur spécialisation</h5>
 												</div>
-												<div class="panel-body">	
+												<div class="panel-body">
 													<form role="form" name="dcotorspcl" method="post" >
 														<div class="form-group">
 															<label for="exampleInputEmail1">
-																Doctor Spécialisation
+                                                            Éditer Docteur spécialisation
 															</label>
-							<input type="text" name="spécialisation" class="form-control"  placeholder="Entrez la spécialisation du médecin" require>
+
+	<?php 
+
+$id=intval($_GET['id']);
+	$sql=mysqli_query($conn,"select * from doctorspécialisation where id='$id'");
+while($row=mysqli_fetch_array($sql))
+{														
+	?>		<input type="text" name="specialisation" class="form-control" value="<?php echo $row['spécialisation'];?>" >
+	<?php } ?>
 														</div>
+												
+														
+														
+														
 														<button type="submit" name="submit" class="btn btn-o btn-primary">
-															Submit
+                                                        Mettre à jour
 														</button>
 													</form>
 												</div>
@@ -93,51 +100,8 @@ if(isset($_GET['del']))
 											</div>
 										</div>
 									</div>
-									<hr />
-									<div class="row">
-								<div class="col-md-12">
-									<h5 class="over-title margin-bottom-15">Manage <span class="text-bold">Docter Spécialisation</span></h5>
+
 									
-									<table class="table table-hover" id="sample-table-1">
-										<thead>
-											<tr>
-												<th class="center">id</th>
-												<th>Spécialisation</th>
-												<th>Action</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-<?php
-$sql=mysqli_query($conn,"select * from doctorspécialisation");
-
-while($row=mysqli_fetch_array($sql))
-{
-?>
-
-											<tr>
-												<td class="center"><?php echo $row['id'];?>.</td>
-												<td class="hidden-xs"><?php echo $row['spécialisation'];?></td>
-												
-												
-												<td >
-												<div class="visible-md visible-lg hidden-sm hidden-xs">
-						
-	<a href="edit-doctor-specialisation.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"  style="color: bleu" ></i></a>											
-	<a href="doc-specialisation.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
-												</div>
-												</td>
-											</tr>
-											
-											<?php 
-
-											 }?>
-											
-											
-										</tbody>
-									</table>
-								</div>
-							</div>
 								</div>
 							</div>
 						</div>
@@ -148,12 +112,11 @@ while($row=mysqli_fetch_array($sql))
 				</div>
 			</div>
 			<!-- start: FOOTER -->
-	
+	<?php include('includ/footer.php');?>
 			<!-- end: FOOTER -->
 		
-	
 		</div>
-		<?php include('includ/footer.php');?>
-		<script src="assets/js/main.js"></script>
+		
+		
 	</body>
 </html>

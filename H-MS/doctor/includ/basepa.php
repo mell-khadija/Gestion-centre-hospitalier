@@ -73,7 +73,7 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="rendezvous.php">
+        <a class="nav-link" href="rendezvous-hi.php">
           <i class="fas fa-fw fa-table"></i>
           <span> Historique Des Rendez-vous</span></a>
       </li>

@@ -11,12 +11,12 @@ if(isset($_POST['delete_btn']))
     if($query_run)
     {
         echo 'Your Data is Deleted';
-        header('Location: manage-patient.php'); 
+        header('Location: patients.php'); 
     }
     else
     {
         echo 'Your Data is NOT DELETED';       
-        header('Location: manage-patient.php'); 
+        header('Location: patients.php'); 
     }    
 }
 ?>

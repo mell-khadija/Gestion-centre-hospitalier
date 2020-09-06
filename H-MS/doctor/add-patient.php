@@ -2,17 +2,14 @@
 session_start();
 
 include('includ/conection.php');
-
-
-
-
-
-
+include('includ/checklogin.php');
+check_login();
 
 	
 if(isset($_POST['submit']))
 {	
-$id=$_SESSION['id'];
+	$id=$_POST['id'];
+$docid=$_SESSION['id'];
 $nomPatient=$_POST['nomP'];
 $localisation=$_POST['local'];
 $agePatient=$_POST['agP'];
@@ -25,11 +22,11 @@ $numero=$_POST['numero'];
 
 
 
-$sql=mysqli_query($conn,"INSERT INTO `patients`(`id`, `nomPatient`, `localisation`, `agePatient`, `sexePatient`, `telPatient`, `date de naissance`, `diagnostic`, `ordonnance`, `numéro`) values('$id','$nomPatient','$localisation','$agePatient','$sexePatient','$telPatient','$dateN','$DiaP','$ordP','$numero')");
+$sql=mysqli_query($conn,"INSERT INTO `patients`(`id`,`Docid`, `nomPatient`, `localisation`, `agePatient`, `sexePatient`, `telPatient`, `date de naissance`, `diagnostic`, `ordonnance`, `numéro`) values('$id','$docid','$nomPatient','$localisation','$agePatient','$sexePatient','$telPatient','$dateN','$DiaP','$ordP','$numero')");
 if($sql)
 {
-echo "<script>alert('Patient info added Successfully');</script>";
-header('location:add-patient.php');
+echo "<script>alert('Patient info added Successfully')</script>";
+header('location:dashboard.php');
 
 }
 }
@@ -53,7 +50,21 @@ header('location:add-patient.php');
 		<link rel="stylesheet" href="css/styles.css">
 		
 
-	
+		<script>
+function userAvailability() {
+$("#loaderIcon").show();
+jQuery.ajax({
+url: "check_availability.php",
+data:'nome='+$("#patnome").val(),
+type: "POST",
+success:function(data){
+$("#users-availability").html(data);
+$("#loaderIcon").hide();
+},
+error:function (){}
+});
+}
+</script>
 	</head>
 	<body>
 		<div id="app">		
@@ -216,4 +227,5 @@ Ajouter
         <?php include('includ/footer.php');?>
 		
 	</body>
+	<script src="vendor/jquery/jquery.min.js"></script>
 </html>

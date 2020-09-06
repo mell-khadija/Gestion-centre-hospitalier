@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+error_reporting(0);
 include('includ/conection.php');
 ?>
 
@@ -23,16 +26,11 @@ include('includ/conection.php');
   <div class="card-body">
 
     <div class="table-responsive">
-    <?php
-
-        $query = "SELECT * FROM patients";
-        $query_run = mysqli_query($conn, $query);
-        
-    ?>
+    
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-              <th > ID </th>
+              <th > # </th>
               <th > Nom </th>
               <th > Localisation</th>
               <th >Age </th>
@@ -46,13 +44,14 @@ include('includ/conection.php');
         </thead>
         <tbody>
         <?php
-        if(mysqli_num_rows($query_run) > 0)        
+        $docid=$_SESSION['id'];
+        $sql=mysqli_query($conn,"select * from patients where Docid='$docid' ");
+        $cnt=1;
+        while($row=mysqli_fetch_array($sql))
         {
-            while($row = mysqli_fetch_assoc($query_run))
-            {
                ?>
           <tr>
-            <td><?php  echo $row['id']; ?></td>
+            <td><?php  echo $cnt; ?>.</td>
             <td><?php  echo $row['nomPatient']; ?></td>
             <td><?php  echo $row['localisation']; ?></td>
             <td><?php  echo $row['agePatient']; ?></td>
@@ -63,29 +62,22 @@ include('includ/conection.php');
            
            
             <td>
-                <form action="edit-doctor.php" method="post">
+                <form action="edit-patient.php" method="post">
                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                     <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                 </form>
             </td>
             <td>
-                <form action="delet-doctor.php" method="post">
+                <form action="delet-patient.php" method="post">
                   <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                   <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                 </form>
             </td>
-            <td>
-                <form action="delet-doctor.php" method="post">
-                <a href="view-patient.php?viewid=<?php echo $row['ID'];?>"><i class="fa fa-eye"></i></a>
-                 
-                </form>
-            </td>
+           
           </tr>
           <?php
-            } 
-        }
-        else {
-            echo "No Record Found";
+           
+           $cnt=$cnt+1;
         }
         ?>
         </tbody>

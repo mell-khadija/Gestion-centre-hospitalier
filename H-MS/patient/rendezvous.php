@@ -19,7 +19,7 @@ $rdtime=$_POST['rdtime'];
 echo  $rdtime;
 
 
-$query="INSERT INTO `rendez-vous`(`id`, `doctor Spécialisation`, `doctorId`, `patientId`, `rendez-vous Date`, `rendez-vous Heure`) VALUES('','$spécialisation','$doctorid','$patientid','$rddate','$rdtime')";
+$query="INSERT INTO `rendez_vous`(`id`, `doctor Spécialisation`, `doctorId`, `patientId`, `rendez-vous Date`, `rendez-vous Heure`) VALUES('','$spécialisation','$doctorid','$patientid','$rddate','$rdtime')";
 $new = mysqli_query($conn, $query);
 if($new){
   echo ' data inserted';
